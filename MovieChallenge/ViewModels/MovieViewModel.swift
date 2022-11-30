@@ -27,12 +27,12 @@ class MovieModelWithoutRx: MovieModelWithoutRxProtocol {
     }
     
     func performGetMovie(keyWord: String) {
+        print("keyworld -- \(keyWord)")
         let rootURl = "https://www.omdbapi.com/?s="
         let key = "&apikey=b831f50c"
         let urlStr = rootURl+"\(keyWord)"+key
         guard let url = URL(string: urlStr) else {return}
         let urlRq = URLRequest(url: url)
-        
         worker.getArticle(url: urlRq) { response in
             self.responseMovie.value = response
             guard let listSearch = response.Search else {return}

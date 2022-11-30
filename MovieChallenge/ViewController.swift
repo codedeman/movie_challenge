@@ -15,9 +15,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBarView: UISearchBar!
     @IBOutlet weak var lblResult: UILabel!
+    var timer: Timer!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpUi()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     private func setUpUi() {
@@ -96,13 +101,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             self.listMovie = []
             self.showEmptyMessage()
         } else {
             NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(ViewController.reload), object: nil)
-            perform(#selector(reload),with: searchBar,afterDelay: 0.5)
+            perform(#selector(reload),with: nil,afterDelay: 1)
+
         }
     }
     
